@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv8 行人检测</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('./assests/tk.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 90%;
+            overflow: hidden;
+        }
+        .container input, .container button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .result img {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 10px;
+        }
+        .button-icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .button-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YOLOv8 行人检测</h1>
+        <input type="file" id="imageUpload" accept="image/*">
+        <button onclick="uploadImage()">
+            <img class="button-icon" src="path/to/upload-icon.svg" alt="上传图标" width="20" height="20">
+            <span class="button-text">上传并检测</span>
+        </button>
+        <div class="result">
+            <h2>原始图像</h2>
+            <img id="uploadedImage" src="" alt="上传的图像">
+            <h2>检测结果</h2>
+            <img id="resultImage" src="" alt="检测结果">
+        </div>
+    </div>
+
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('imageUpload');
+            if (fileInput.files.length === 0) {
+                alert('请选择要上传的图像。');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // 显示上传的图像
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('uploadedImage').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+
+            try {
+                const response = await fetch('http://localhost:8000/predict/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('resultImage').src = url;
+                } else {
+                    alert('错误：无法检测行人。');
+                }
+            } catch (error) {
+                console.error('Error during fetch:', error);
+                alert('网络错误，请稍后重试。');
+            }
+        }
+    </script>
+</body>
+</html>

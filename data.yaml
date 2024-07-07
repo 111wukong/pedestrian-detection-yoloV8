@@ -1,0 +1,10 @@
+path: E:/yolov8行人检测/ziliao/source  # 数据集的根路径
+train: images/train  # 训练集图像路径
+val: images/val  # 验证集图像路径
+test: images/test  # 测试集图像路径 (如果有的话)
+
+# Number of classes
+nc: 1  # 类别数量 (行人检测，所以只有1类)
+
+# Class names
+names: ['person']  # 类别名称
