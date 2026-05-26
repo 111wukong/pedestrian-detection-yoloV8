@@ -1,4 +1,4 @@
-# YOLOv8 Pedestrian Detection - Dependencies
+# YOLOv8 Pedestrian Detection — Dependencies
 
 # Core
 ultralytics>=8.0.0
@@ -12,5 +12,9 @@ Pillow>=10.0.0
 # Visualization
 matplotlib>=3.7.0
 
-# Web Service
-flask>=2.3.0
+# Web Demo
+gradio>=4.0.0
+
+# Web Service (legacy, for yolov8_service.py)
+fastapi>=0.100.0
+uvicorn>=0.23.0
