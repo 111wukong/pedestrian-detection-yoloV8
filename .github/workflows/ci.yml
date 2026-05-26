@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff pylint
+
+      - name: Lint with Ruff
+        run: ruff check . --output-format=github
+        continue-on-error: true
+
+      - name: Lint with Pylint
+        run: pylint --fail-under=7 app.py yolov8_service.py || true
+        continue-on-error: true
+
+      - name: Basic import test
+        run: |
+          python -c "import gradio; print('✅ gradio', gradio.__version__)"
+          python -c "from ultralytics import YOLO; print('✅ ultralytics OK')"
+          python -c "import cv2; print('✅ OpenCV', cv2.__version__)"
+          python -c "import numpy; print('✅ numpy', numpy.__version__)"
