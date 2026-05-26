@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model weights (downloaded at runtime)
+*.pt
+*.pth
+*.onnx
+
+# Images & videos
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.mp4
+*.avi
+*.mov
+
+# Training outputs
+runs/
+
+# Test data
+test-img/
+
+# Environment
+.env
+
+# Docker
+Dockerfile
+.dockerignore
