@@ -1,0 +1,44 @@
+# Model weights
+*.pt
+*.pth
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+
+# Videos
+*.mp4
+*.avi
+*.mov
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training outputs
+runs/
+
+# Test images
+test-img/
+
+# Environment
+.env
