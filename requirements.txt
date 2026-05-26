@@ -1,0 +1,16 @@
+# YOLOv8 Pedestrian Detection - Dependencies
+
+# Core
+ultralytics>=8.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Image & Video Processing
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Web Service
+flask>=2.3.0
